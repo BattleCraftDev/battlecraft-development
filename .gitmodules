@@ -1,0 +1,9 @@
+[submodule "battlecraft-frontend"]
+	path = battlecraft-frontend
+	url = git@github.com:BattleCraftDev/battlecraft-frontend.git
+[submodule "battlecraft-admin"]
+	path = battlecraft-admin
+	url = git@github.com:BattleCraftDev/battlecraft-admin.git
+[submodule "battlecraft-backend"]
+	path = battlecraft-backend
+	url = git@github.com:Zharckov/battlecraft-backend.git

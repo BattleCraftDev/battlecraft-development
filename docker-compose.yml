@@ -21,6 +21,7 @@ services:
       DB_HOST: db
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
+      RECAPTCHA_SECRET: ${RECAPTCHA_SECRET}
     ports:
       - "4000:4000"
     depends_on: 

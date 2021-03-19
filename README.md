@@ -1,6 +1,6 @@
 # Battlecraft development environment
 
-## Instalation
+## Installation
 ```
 $ git clone git@github.com:BattleCraftDev/battlecraft-development.git
 $ git submodule init && git submodule update

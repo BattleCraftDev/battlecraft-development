@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: mariadb
+    restart: always
+    volumes:
+      - ./db/:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+
+  backend:
+    build: ./battlecraft-backend
+    volumes:
+      - /app/node_modules/
+      - ./battlecraft-backend:/app
+    environment:
+      DB_HOST: db
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "4000:4000"
+    depends_on: 
+      - db
+
+  admin:
+    build: ./battlecraft-admin
+    volumes:
+      - /app/node_modules/
+      - ./battlecraft-admin:/app
+    environment:
+       REACT_APP_SERVER_HOST: http://localhost:4000
+    ports:
+      - "3001:3001"
+    depends_on:
+      - backend
+
+  frontend:
+    build: ./battlecraft-frontend
+    volumes:
+      - /app/node_modules/
+      - ./battlecraft-frontend:/app
+    environment:
+      CHOKIDAR_USEPOLLING: 'true'
+      REACT_APP_SERVER_HOST: http://localhost:4000
+      REACT_APP_ADMIN_HOST: http://localhost:3001
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend

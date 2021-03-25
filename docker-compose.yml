@@ -12,11 +12,11 @@ services:
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
 
-  backend:
-    build: ./battlecraft-backend
+  api:
+    build: ./battlecraft-api
     volumes:
       - /app/node_modules/
-      - ./battlecraft-backend:/app
+      - ./battlecraft-api:/app
     environment:
       DB_HOST: db
       DB_USERNAME: ${DB_USERNAME}
@@ -37,7 +37,7 @@ services:
     ports:
       - "3001:3001"
     depends_on:
-      - backend
+      - api
 
   frontend:
     build: ./battlecraft-frontend
@@ -51,4 +51,4 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - backend
+      - api
